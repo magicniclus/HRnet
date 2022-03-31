@@ -1,11 +1,16 @@
-import React from 'react';
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const CurrentEmployes = () => {
-    return (
-        <div>
-            <h1>List</h1>
-        </div>
-    );
-};
+const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
 
-export default CurrentEmployes;
+function CurrentEmployes() {
+
+  return (
+    <div style={{ height: 400, width: '100%' }}>
+      <NavLink to="/create-employee">Home</NavLink>
+    </div>
+  );
+}
+
+export default CurrentEmployes
+
