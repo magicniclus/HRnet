@@ -1,15 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import SelectButton from '../component/SelectButton';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const HomePage = () => {
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [birth, setBirth] = useState("")
-    const [start, setStart] = useState("")
-    const [street, setStreet] = useState("")
-    const [city, setCity] = useState("")
-    const [code, setCode] = useState("")
+    const stateValue = ["Gironde", "Loire Atlantique", "Pays-Basque", "Pays de la Loire", "île de France"];
+    const department = ["Sales", "Marketing", "Enginnering", "Humain Resources", "Legal"]
+
+    const [itsLogged, setItsLogged] = useState("logged")
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [birth, setBirth] = useState("");
+    const [start, setStart] = useState("");
+    const [street, setStreet] = useState("");
+    const [city, setCity] = useState("");
+    const [code, setCode] = useState("");
 
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
 
@@ -59,49 +66,70 @@ const HomePage = () => {
             let getOne = localStorage.getItem("employees")
             let get = JSON.parse(getOne);
             console.log(get);
+            setItsLogged('clicked')
         }
     }
-
+//TODO Comment récuperer les données du bouton (Pourquoi ne pas le faire avec redux || localstorage ?)
+//TODO Dois-je récupérer les vrais valeurs americaines
     return (
-        <div>
-            <h1>HRnet Exemple</h1>
-            <NavLink to="/employee-list">View Current Employees</NavLink>
-            <h2>Create Employee</h2>
-            <form onSubmit={addEmployee}>
-                <label className="fistName" >
-                    First Name
-                    <input type="text" id="firstName" value={firstName} onChange={handleChangeFistName} />
-                </label>
-                <label className="lastName" >
-                    Last Name
-                    <input type="text" id="lastName" value={lastName} onChange={handleChangeLastName} />
-                </label>
-                <label className="birth" >
-                    Date of Birth
-                    <input type="date" id="birth" value={birth} onChange={handleChangeBirth} />
-                </label>
-                <label className="start" >
-                    Last Name
-                    <input type="date" id="start" value={start} onChange={handleChangeStart} />
-                </label>
-                <div className="adress">
-                    <p>Adress</p>
-                    <label className="street" >
-                        Street
-                        <input type="text" id="street" value={street} onChange={handleChangeStreet} />
-                    </label>
-                    <label className="city" >
-                        City
-                        <input type="text" id="city" value={city} onChange={handleChangeCity} />
-                    </label>
-                    <label className="code" >
-                        Zip Code
-                        <input type="number" id="code" value={code} onChange={handleChangeCode} />
-                    </label>
+        <>
+            <div className={itsLogged}>
+                <div className="container">
+                    <div className="closeModale">
+                        {/* <p onClick={()=>setItsLogged("logged")}>x</p> */}
+                        <ClearIcon color="primary" onClick={()=>setItsLogged("logged")} />
+                    </div>
+                    <p className="text">Employee Created!</p>
                 </div>
-                <button>Save</button>
-            </form>
-        </div>
+            </div>
+            <main className="homePage">
+                <h1>HRnet Exemple</h1>
+                <NavLink to="/employee-list">View Current Employees</NavLink>
+                <h2>Create Employee</h2>
+                <form onSubmit={addEmployee}>
+                    <label className="fistName" >
+                        First Name
+                        <input type="text" id="firstName" value={firstName} onChange={handleChangeFistName} />
+                    </label>
+                    <label className="lastName" >
+                        Last Name
+                        <input type="text" id="lastName" value={lastName} onChange={handleChangeLastName} />
+                    </label>
+                    <label className="birth" >
+                        Date of Birth
+                        <input type="date" id="birth" value={birth} onChange={handleChangeBirth} />
+                    </label>
+                    <label className="start" >
+                        Last Name
+                        <input type="date" id="start" value={start} onChange={handleChangeStart} />
+                    </label>
+                    <div className="adress">
+                        <p className="adressTitle">Adress</p>
+                        <label className="street" >
+                            Street
+                            <input type="text" id="street" value={street} onChange={handleChangeStreet} />
+                        </label>
+                        <label className="city" >
+                            City
+                            <input type="text" id="city" value={city} onChange={handleChangeCity} />
+                        </label>
+                        <div >
+                            <p className="state">State</p>
+                            <SelectButton etat={stateValue} />
+                        </div>
+                    </div>
+                        <div className="department" >
+                            <p>Department</p>
+                            <SelectButton etat={department} />  
+                        </div>
+                        <label className="code" >
+                            Zip Code
+                            <input type="number" id="code" value={code} onChange={handleChangeCode} />
+                        </label>
+                    <button className="button">Save</button>
+                </form>
+            </main>
+        </>
     );
 };
 

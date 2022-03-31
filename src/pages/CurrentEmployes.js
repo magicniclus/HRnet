@@ -6,9 +6,10 @@ const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
 function CurrentEmployes() {
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <main className="currentEmployees">
+      <h1>Current Employees</h1>
       <NavLink to="/create-employee">Home</NavLink>
-    </div>
+    </main>
   );
 }
 
