@@ -9,12 +9,14 @@ import { addDepartment, addState } from '../redux/action/action';
 
 const SelectButton = (props) => {
     const addValue = props.etat;
+    const addClass = props.addClass;
     const [finalValue, setFinalValue] = useState(addValue[0])
 
     const dispatch = useDispatch()
 
     const handleChange = (e)=>{
       setFinalValue(e.target.value)
+      //BUG décalage de la récéption des data dans le reducer 
       if(finalValue === "Sales" || finalValue === "Marketing" || finalValue === "Enginnering" || finalValue === "Humain Resources" || finalValue === "Legal"){
             dispatch(addDepartment(finalValue))
         } else {
@@ -34,7 +36,7 @@ const SelectButton = (props) => {
         onChange={handleChange}
         >
         {addValue.map((value)=>
-            <option value={value}>{value}</option>
+            <option key={value} value={value}>{value}</option>
         )}
         </NativeSelect>
       </FormControl>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-
-const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
+import DatePickerComponent from '../component/DatePicker';
 
 function CurrentEmployes() {
 
@@ -9,6 +8,7 @@ function CurrentEmployes() {
     <main className="currentEmployees">
       <h1>Current Employees</h1>
       <NavLink to="/create-employee">Home</NavLink>
+      <DatePickerComponent />
     </main>
   );
 }

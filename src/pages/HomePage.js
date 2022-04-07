@@ -7,6 +7,9 @@ import { Elderly } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalCreateEmployee from '../component/ModalCreateEmployee';
 import { addUser } from '../redux/action/action';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { dateFormat } from '../utils';
 
 const HomePage = () => {
     const department = ["Sales", "Marketing", "Enginnering", "Humain Resources", "Legal"]
@@ -116,19 +119,27 @@ const HomePage = () => {
         setCode(e.target.value)
     }
 
+    const [selectDatePicker, setSelectDatepicker] = useState(null);
+    const [selectDatePickerDeux, setSelectDatepickerDeux] = useState(null);
+    
+    const [getStateValue , setGetStateValue] = useState('')
+    const [getDepartmentValue , setGetDepartmentValue] = useState('')
+
     const handleChangeState = (e) => {
         setStateInValue(e.target.value)
     }
     
     const addEmployee = (e)=>{
         e.preventDefault();
+        const allSelected = document.querySelectorAll('select');
+
         if(firstName !== ""){
             
             const user = {
                 firstName : firstName,
                 lastName : lastName,
-                birth : birth,
-                start : start,
+                birth : dateFormat(selectDatePicker),
+                start : dateFormat(selectDatePickerDeux),
                 street : street,
                 city : city,
                 department: allState.department,
@@ -141,19 +152,17 @@ const HomePage = () => {
             
         }
     }
-//TODO Comment récuperer les données du bouton (Pourquoi ne pas le faire avec redux || localstorage ?)
-//TODO Dois-je récupérer les vrais valeurs americaines
-return (
-    <>
+
+
+    return (
+        <>
             <div className={itsLogged}>
                 <div className="container">
                     <div className="closeModale">
-                        {/* <p onClick={()=>setItsLogged("logged")}>x</p> */}
                         <ClearIcon color="primary" onClick={()=>setItsLogged("logged")} />
                     </div>
                     <p className="text">Employee Created!</p>
                 </div>
-                {/* <ModalCreateEmployee /> */}
             </div>
             <main className="homePage">
                 <h1>HRnet Exemple</h1>
@@ -170,11 +179,11 @@ return (
                     </label>
                     <label className="birth" >
                         Date of Birth
-                        <input type="date" id="birth" value={birth} onChange={handleChangeBirth} />
+                        <DatePicker selected={selectDatePicker} onChange={date => setSelectDatepicker(date)} maxDate={new Date()} placeholderText="dd/mm/yyyy" />
                     </label>
                     <label className="start" >
                         Last Name
-                        <input type="date" id="start" value={start} onChange={handleChangeStart} />
+                        <DatePicker selected={selectDatePickerDeux} onChange={date => setSelectDatepickerDeux(date)} maxDate={new Date()} placeholderText="dd/mm/yyyy" />
                     </label>
                     <div className="adress">
                         <p className="adressTitle">Adress</p>
@@ -188,12 +197,12 @@ return (
                         </label>
                         <div >
                             <p className="state">State</p>
-                            <SelectButton etat={stateValue} />
+                            <SelectButton etat={stateValue} addClass="state" />
                         </div>
                     </div>
                         <div className="department" >
                             <p>Department</p>
-                            <SelectButton etat={department} />  
+                            <SelectButton etat={department} addClass="department" />  
                         </div>
                         <label className="code" >
                             Zip Code
