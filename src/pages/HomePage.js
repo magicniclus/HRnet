@@ -3,10 +3,73 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import SelectButton from '../component/SelectButton';
 import ClearIcon from '@mui/icons-material/Clear';
+import { Elderly } from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
+import ModalCreateEmployee from '../component/ModalCreateEmployee';
+import { addUser } from '../redux/action/action';
 
 const HomePage = () => {
-    const stateValue = ["Gironde", "Loire Atlantique", "Pays-Basque", "Pays de la Loire", "île de France"];
     const department = ["Sales", "Marketing", "Enginnering", "Humain Resources", "Legal"]
+
+    const stateValue = [
+        'Alabama',
+        'Alaska',
+        'American Samoa',
+        'Arizona',
+        'Arkansas',
+        'California',
+        'Colorado',
+        'Connecticut',
+        'Delaware',
+        'District Of Columbia',
+        'Federated States Of Micronesia',
+        'Florida',
+        'Georgia',
+        'Guam',
+        'Hawaii',
+        'Idaho',
+        'Illinois',
+        'Iowa',
+        'Kansas',
+        'Kentucky',
+        'Louisiana',
+        'Maine',
+        'Marshall Islands',
+        'Massachusetts',
+        'Michigan',
+        'Minnesota',
+        'Mississippi',
+        'Missouri',
+        'Montana',
+        'Nebraska',
+        'Nevada',
+        'New Hampshire',
+        'New Jersey',
+        'New Mexico',
+        'New York',
+        'North California',
+        'North Dakota',
+        'Northern Mariana Islands',
+        'Ohio',
+        'Oklahoma',
+        'Oregon',
+        'Palau',
+        'Pennsylvania',
+        'Puerto Rico',
+        'Rhode Island',
+        'South California',
+        'South Dakota',
+        'Tennessee',
+        'Texas',
+        'Utah',
+        'Vermont',
+        'Virgin Islands',
+        'Virginia',
+        'Washington',
+        'West Virginia',
+        'Wisconsin',
+        'Wyoming',
+    ];
 
     const [itsLogged, setItsLogged] = useState("logged")
 
@@ -18,39 +81,49 @@ const HomePage = () => {
     const [city, setCity] = useState("");
     const [code, setCode] = useState("");
 
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    const [stateInValue, setStateInValue] = useState("");
+    const [stateSales, setStateSales] = useState("")
 
+    const dispatch = useDispatch()
+
+    const allState = useSelector(state=>state)
+    
     const handleChangeFistName = (e)=>{
         setFirstName(e.target.value)
     }
-
+    
     const handleChangeLastName = (e)=>{
         setLastName(e.target.value)
     }
-
+    
     const handleChangeBirth = (e)=>{
         setBirth(e.target.value)
     }
-
+    
     const handleChangeStart = (e)=>{
         setStart(e.target.value)
     }
-
+    
     const handleChangeStreet = (e)=>{
         setStreet(e.target.value)
     }
-
+    
     const handleChangeCity = (e)=>{
         setCity(e.target.value)
     }
-
+    
     const handleChangeCode = (e)=>{
         setCode(e.target.value)
     }
 
+    const handleChangeState = (e) => {
+        setStateInValue(e.target.value)
+    }
+    
     const addEmployee = (e)=>{
         e.preventDefault();
         if(firstName !== ""){
+            
             const user = {
                 firstName : firstName,
                 lastName : lastName,
@@ -58,21 +131,20 @@ const HomePage = () => {
                 start : start,
                 street : street,
                 city : city,
+                department: allState.department,
+                state : allState.state,
                 code : code
             }
-            employees.push(user);
-            localStorage.setItem('employees', JSON.stringify(employees));
-    
-            let getOne = localStorage.getItem("employees")
-            let get = JSON.parse(getOne);
-            console.log(get);
+
+            dispatch(addUser(user))
             setItsLogged('clicked')
+            
         }
     }
 //TODO Comment récuperer les données du bouton (Pourquoi ne pas le faire avec redux || localstorage ?)
 //TODO Dois-je récupérer les vrais valeurs americaines
-    return (
-        <>
+return (
+    <>
             <div className={itsLogged}>
                 <div className="container">
                     <div className="closeModale">
@@ -81,6 +153,7 @@ const HomePage = () => {
                     </div>
                     <p className="text">Employee Created!</p>
                 </div>
+                {/* <ModalCreateEmployee /> */}
             </div>
             <main className="homePage">
                 <h1>HRnet Exemple</h1>
