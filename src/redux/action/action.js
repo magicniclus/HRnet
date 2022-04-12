@@ -6,9 +6,8 @@ export const successLoading = ()=>{
 
 export const addDepartment= (value)=>{
     console.log("addDepartment: ", value);
-    return {
-        type: "addDepartment",
-        payload: value
+    return (dispatch) => {
+        dispatch({type: "addDepartment", payload: value})
     }
 }
 

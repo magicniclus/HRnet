@@ -3,13 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import SelectButton from '../component/SelectButton';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Elderly } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-import ModalCreateEmployee from '../component/ModalCreateEmployee';
 import { addUser } from '../redux/action/action';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { dateFormat } from '../utils';
+import ModalCreateEmployee from '../component/ModalCreateEmployee';
 
 const HomePage = () => {
     const department = ["Sales", "Marketing", "Enginnering", "Humain Resources", "Legal"]
@@ -78,18 +77,11 @@ const HomePage = () => {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [birth, setBirth] = useState("");
-    const [start, setStart] = useState("");
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [code, setCode] = useState("");
 
-    const [stateInValue, setStateInValue] = useState("");
-    const [stateSales, setStateSales] = useState("")
-
     const dispatch = useDispatch()
-
-    const allState = useSelector(state=>state)
     
     const handleChangeFistName = (e)=>{
         setFirstName(e.target.value)
@@ -97,14 +89,6 @@ const HomePage = () => {
     
     const handleChangeLastName = (e)=>{
         setLastName(e.target.value)
-    }
-    
-    const handleChangeBirth = (e)=>{
-        setBirth(e.target.value)
-    }
-    
-    const handleChangeStart = (e)=>{
-        setStart(e.target.value)
     }
     
     const handleChangeStreet = (e)=>{
@@ -122,16 +106,8 @@ const HomePage = () => {
     const [selectDatePicker, setSelectDatepicker] = useState(null);
     const [selectDatePickerDeux, setSelectDatepickerDeux] = useState(null);
     
-    const [getStateValue , setGetStateValue] = useState('')
-    const [getDepartmentValue , setGetDepartmentValue] = useState('')
-
-    const handleChangeState = (e) => {
-        setStateInValue(e.target.value)
-    }
-    
     const addEmployee = (e)=>{
         e.preventDefault();
-        const allSelected = document.querySelectorAll('select');
 
         if(firstName !== ""){
             
@@ -142,8 +118,8 @@ const HomePage = () => {
                 start : dateFormat(selectDatePickerDeux),
                 street : street,
                 city : city,
-                department: allState.department,
-                state : allState.state,
+                // department: allState.department,
+                // state : allState.state,
                 code : code
             }
 
@@ -153,16 +129,10 @@ const HomePage = () => {
         }
     }
 
-
     return (
         <>
-            <div className={itsLogged}>
-                <div className="container">
-                    <div className="closeModale">
-                        <ClearIcon color="primary" onClick={()=>setItsLogged("logged")} />
-                    </div>
-                    <p className="text">Employee Created!</p>
-                </div>
+            <div onClick={()=>setItsLogged(itsLogged === "clicked" ? "logged" : "clicked")} className={itsLogged}>
+                <ModalCreateEmployee value={itsLogged === "clicked" ? false : true }/>
             </div>
             <main className="homePage">
                 <h1>HRnet Exemple</h1>

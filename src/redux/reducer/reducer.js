@@ -1,8 +1,9 @@
 const initState = {
     isLoading : false,
+    users: {
     states : "Alabama",
-    department : "Sales",
-    users:[]
+    department : "Sales"
+    }
 }
 
 const reducer = (state = initState, action)=>{
@@ -11,19 +12,21 @@ const reducer = (state = initState, action)=>{
             return {
                 ...state,
                 isLoading : true,
-                users: [...state.users, action.payload]
+                users: {...state.users, ...action.payload}
             }
             
-        case "addDepartment":  
+        case "addDepartment": 
+        alert(action.payload)
         return{
             ...state,
-            department : action.payload
+            users: {...state.users, department : action.payload}
+            
         }    
 
         case "addState": 
         return{
             ...state,
-            states : action.payload
+            users: {...state.users, states : action.payload}
         }    
 
         default: 
