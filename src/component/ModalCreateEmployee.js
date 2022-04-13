@@ -16,12 +16,35 @@ const customStyles = {
 function ModalCreateEmployee(props) {
     const { isOpen, onRequestClose, onClick } = props;
 
+<<<<<<< Updated upstream
     return (
         <Modal
             ariaHideApp={false}
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             style={customStyles}
+=======
+  return (
+    <Box sx={{ width: "20%"}}>
+      <Collapse in={open} >
+        <Alert
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setOpen(false)
+                setOpen(true)
+              }}
+            >
+              <CloseIcon
+              color="primary"
+              />
+            </IconButton >
+          }
+          sx={{ mb: 2 }}
+>>>>>>> Stashed changes
         >
             <button onClick={onClick}>X</button>
             <h2 className="modal">Employee Created!</h2>
