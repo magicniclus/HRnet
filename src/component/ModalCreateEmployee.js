@@ -1,6 +1,10 @@
 import React from 'react';
 import Modal from "react-modal";
-import ClearIcon from '@mui/icons-material/Clear';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 const customStyles = {
     content: {
@@ -14,42 +18,31 @@ const customStyles = {
 };
 
 function ModalCreateEmployee(props) {
-    const { isOpen, onRequestClose, onClick } = props;
+    const [open, setOpen] = React.useState(props.value);
 
-<<<<<<< Updated upstream
     return (
-        <Modal
-            ariaHideApp={false}
-            isOpen={isOpen}
-            onRequestClose={onRequestClose}
-            style={customStyles}
-=======
-  return (
-    <Box sx={{ width: "20%"}}>
-      <Collapse in={open} >
-        <Alert
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false)
-                setOpen(true)
-              }}
-            >
-              <CloseIcon
-              color="primary"
-              />
-            </IconButton >
-          }
-          sx={{ mb: 2 }}
->>>>>>> Stashed changes
-        >
-            <button onClick={onClick}>X</button>
-            <h2 className="modal">Employee Created!</h2>
-        </Modal>
-    )
+        <Box sx={{ width: "20%" }}>
+            <Collapse in={open}>
+                <Alert
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setOpen(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    Employee Created!
+                </Alert>
+            </Collapse>
+        </Box>
+    );
 }
 
 export default ModalCreateEmployee;

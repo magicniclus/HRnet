@@ -2,23 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import SelectButton from '../component/SelectButton';
-<<<<<<< Updated upstream
 import ClearIcon from '@mui/icons-material/Clear';
 import { Elderly } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalCreateEmployee from '../component/ModalCreateEmployee';
-=======
-import { useDispatch } from 'react-redux';
->>>>>>> Stashed changes
 import { addUser } from '../redux/action/action';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { dateFormat } from '../utils';
-<<<<<<< Updated upstream
-=======
-import ModalCreateEmployee from '../component/ModalCreateEmployee';
-// import { DropDownBtn } from '@magicniclus/reactdropdownbtn'
->>>>>>> Stashed changes
 
 const HomePage = () => {
     const department = ["Sales", "Marketing", "Enginnering", "Humain Resources", "Legal"]
@@ -165,13 +156,16 @@ const HomePage = () => {
 
     return (
         <>
-            <div className={itsLogged}>
+            {/* <div className={itsLogged}>
                 <div className="container">
                     <div className="closeModale">
                         <ClearIcon color="primary" onClick={()=>setItsLogged("logged")} />
                     </div>
                     <p className="text">Employee Created!</p>
                 </div>
+            </div> */} 
+            <div onClick={()=>setItsLogged(itsLogged === "clicked" ? "logged" : "clicked")} className={itsLogged}>
+                <ModalCreateEmployee value={itsLogged === "clicked" ? false : true }/>
             </div>
             <main className="homePage">
                 <h1>HRnet Exemple</h1>
