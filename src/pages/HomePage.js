@@ -2,8 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import SelectButton from '../component/SelectButton';
-import ClearIcon from '@mui/icons-material/Clear';
-import { Elderly } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalCreateEmployee from '../component/ModalCreateEmployee';
 import { addUser } from '../redux/action/action';
@@ -78,14 +76,11 @@ const HomePage = () => {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [birth, setBirth] = useState("");
-    const [start, setStart] = useState("");
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [code, setCode] = useState("");
 
     const [stateInValue, setStateInValue] = useState("");
-    const [stateSales, setStateSales] = useState("")
 
     const dispatch = useDispatch()
 
@@ -97,14 +92,6 @@ const HomePage = () => {
     
     const handleChangeLastName = (e)=>{
         setLastName(e.target.value)
-    }
-    
-    const handleChangeBirth = (e)=>{
-        setBirth(e.target.value)
-    }
-    
-    const handleChangeStart = (e)=>{
-        setStart(e.target.value)
     }
     
     const handleChangeStreet = (e)=>{
@@ -121,9 +108,6 @@ const HomePage = () => {
 
     const [selectDatePicker, setSelectDatepicker] = useState(null);
     const [selectDatePickerDeux, setSelectDatepickerDeux] = useState(null);
-    
-    const [getStateValue , setGetStateValue] = useState('')
-    const [getDepartmentValue , setGetDepartmentValue] = useState('')
 
     const handleChangeState = (e) => {
         setStateInValue(e.target.value)
@@ -131,7 +115,6 @@ const HomePage = () => {
     
     const addEmployee = (e)=>{
         e.preventDefault();
-        const allSelected = document.querySelectorAll('select');
 
         if(firstName !== ""){
             
