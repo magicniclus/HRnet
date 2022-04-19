@@ -23,13 +23,11 @@ export const addState= (value)=>{
 //BUG problème d'import des données des boutons de séléction
 export function addUser(user) {
     return (dispatch) => {
-        console.log(user);
         dispatch({type : "addUser", payload: user});
         const employees = JSON.parse(localStorage.getItem('employees')) || [];
         employees.push(user);
         localStorage.setItem('employees', JSON.stringify(employees));
         let addOneUser = localStorage.getItem("employees")
         let users = JSON.parse(addOneUser);
-        console.log(users);
     };
 }

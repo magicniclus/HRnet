@@ -6,6 +6,7 @@
     "@emotion/react": "^11.9.0",
     "@emotion/serialize": "^1.0.3",
     "@emotion/styled": "^11.8.1",
+    "@magicniclus/components": "^1.0.8",
     "@mui/icons-material": "^5.5.1",
     "@mui/lab": "^5.0.0-alpha.76",
     "@mui/material": "^5.6.0",

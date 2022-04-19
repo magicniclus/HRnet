@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import SelectButton from '../component/SelectButton';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalCreateEmployee from '../component/ModalCreateEmployee';
 import { addUser } from '../redux/action/action';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { dateFormat } from '../utils';
+import {DropDown} from "@magicniclus/components";
+import Test from '../component/test';
 
 const HomePage = () => {
     const department = ["Sales", "Marketing", "Enginnering", "Humain Resources", "Legal"]
@@ -79,8 +80,8 @@ const HomePage = () => {
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [code, setCode] = useState("");
-
     const [stateInValue, setStateInValue] = useState("");
+    const [departmentInValue, setDepartmentInValue] = useState("")
 
     const dispatch = useDispatch()
 
@@ -109,14 +110,18 @@ const HomePage = () => {
     const [selectDatePicker, setSelectDatepicker] = useState(null);
     const [selectDatePickerDeux, setSelectDatepickerDeux] = useState(null);
 
-    const handleChangeState = (e) => {
-        setStateInValue(e.target.value)
+    const handleChangeState = (e) => {   
+        setStateInValue(e)
+    }
+
+    const handleChangeDepartment = (e) => {   
+        setDepartmentInValue(e)
     }
     
     const addEmployee = (e)=>{
         e.preventDefault();
 
-        if(firstName !== ""){
+        if(firstName !== "" && lastName !== "" && street !== "" && city !== "" && code !== "" && stateInValue !== "" && departmentInValue !== ""){
             
             const user = {
                 firstName : firstName,
@@ -125,8 +130,8 @@ const HomePage = () => {
                 start : dateFormat(selectDatePickerDeux),
                 street : street,
                 city : city,
-                department: allState.department,
-                state : allState.state,
+                department: departmentInValue,
+                state : stateInValue,
                 code : code
             }
 
@@ -139,22 +144,15 @@ const HomePage = () => {
 
     return (
         <>
-            {/* <div className={itsLogged}>
-                <div className="container">
-                    <div className="closeModale">
-                        <ClearIcon color="primary" onClick={()=>setItsLogged("logged")} />
-                    </div>
-                    <p className="text">Employee Created!</p>
-                </div>
-            </div> */} 
             <div onClick={()=>setItsLogged(itsLogged === "clicked" ? "logged" : "clicked")} className={itsLogged}>
                 <ModalCreateEmployee value={itsLogged === "clicked" ? false : true }/>
             </div>
             <main className="homePage">
+                <Test />
                 <h1>HRnet Exemple</h1>
                 <NavLink to="/employee-list">View Current Employees</NavLink>
                 <h2>Create Employee</h2>
-                <form onSubmit={addEmployee}>
+                <form onSubmit={(e)=>e.preventDefault()}>
                     <label className="fistName" >
                         First Name
                         <input type="text" id="firstName" value={firstName} onChange={handleChangeFistName} />
@@ -183,18 +181,18 @@ const HomePage = () => {
                         </label>
                         <div >
                             <p className="state">State</p>
-                            <SelectButton etat={stateValue} addClass="state" />
+                            <DropDown title={stateValue[0]} list={stateValue} callBack={handleChangeState} />
                         </div>
                     </div>
                         <div className="department" >
                             <p>Department</p>
-                            <SelectButton etat={department} addClass="department" />  
+                            <DropDown title={department[0]} list={department} callBack={handleChangeDepartment} />
                         </div>
                         <label className="code" >
                             Zip Code
                             <input type="number" id="code" value={code} onChange={handleChangeCode} />
                         </label>
-                    <button className="button">Save</button>
+                    <button type="submit" className="button" onClick={addEmployee}>Save</button>
                 </form>
             </main>
         </>

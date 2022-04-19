@@ -5,23 +5,34 @@ import TextField from "@mui/material/TextField";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 
-const showKeys = ["fistName", "lastName", "startDay", "department", "dateOfBirth", "street", "city", "state", "zipCode"]
+/**
+ * @typedef {("fistName"| "lastName"| "startDay"| "department"| "dateOfBirth"| "street"| "city"| "state"| "zipCode")} showKeys
+ */
 
-function nestedFilter (targetArray, value, set) {
-    targetArray.forEach(element => {
-        showKeys.forEach(el => {
-            // console.log(element[el]);
-            // if(value.toLowerCase() === element[el].toLowerCase()) console.log(element[el]);
-            if(value !== "" || value !== undefined){
-                if(element[el].toString().toLowerCase().includes(value.toString().toLowerCase())) console.log(element[el]);
-            }
-            // targetArray.filter((row) => {
-            //     return Object.keys(row).some((field) => {
-            //         console.log(value(row[field].toString())) ;
-            //     });
-            // })    
-        }) 
-    });
+
+/**
+ * [nestedFilter description]
+ *
+ * @param   {Array.<Object>}  targetArray  [targetArray description]
+ * @param   {String}  value        [value description]
+ * @param   {showKeys}  type         [type description]
+ * @param   {Function}    set
+ *
+ * @return  {void}               [return description]
+ */
+function nestedFilter(targetArray, value, set) {
+    value = value.toLowerCase();
+    let filterArray = [];
+    console.log(targetArray)
+    for (const type of Object.keys(targetArray[0])){
+        if (typeof targetArray[0][type] !== 'string') continue;
+        filterArray = filterArray.concat(targetArray.filter((el) => {
+            if (el[type].toLowerCase().includes(value)) return el;
+        })
+        )
+    }
+
+    set([... new Set(filterArray)]);
 }
 
 function QuickSearchToolbar(props) {
@@ -42,7 +53,7 @@ function QuickSearchToolbar(props) {
                             style={{ visibility: props.value ? 'visible' : 'hidden' }}
                             onClick={props.clearSearch}
                         >
-                        <ClearIcon fontSize="small" />
+                            <ClearIcon fontSize="small" />
                         </IconButton>
                     ),
                 }}
@@ -59,20 +70,22 @@ const EmployeeArray = () => {
 
     const rows = [];
     let element;
-    for (let i = 0, end = users.length; i < end; i++) {
-        element = users[i];
-        rows.push({
-            id: i,
-            firstName: element.firstName,
-            lastName: element.lastName,
-            startDay: element.start,
-            department: element.department,
-            dateOfBirth: element.birth,
-            street: element.street,
-            city: element.city,
-            state: element.state,
-            zipCode: element.code
-        })
+    if (users !== null) {
+        for (let i = 0, end = users.length; i < end; i++) {
+            element = users[i];
+            rows.push({
+                id: i,
+                firstName: element.firstName,
+                lastName: element.lastName,
+                startDay: element.start,
+                department: element.department,
+                dateOfBirth: element.birth,
+                street: element.street,
+                city: element.city,
+                state: element.state,
+                zipCode: element.code
+            })
+        }
     }
 
 
@@ -98,16 +111,16 @@ const EmployeeArray = () => {
     return (
         <div style={{ height: 700, width: '90%', marginTop: "5rem" }}>
             <DataGrid
-            rows={getRows}
-            columns={columns}
-            components={{Toolbar: QuickSearchToolbar}}
-            componentsProps={{
-                toolbar: {
-                    value: searched,
-                    onChange: (e) => requestSearch(e.target.value),
-                    clearSearch: () => requestSearch(''),
-                },
-            }}
+                rows={getRows}
+                columns={columns}
+                components={{ Toolbar: QuickSearchToolbar }}
+                componentsProps={{
+                    toolbar: {
+                        value: searched,
+                        onChange: (e) => requestSearch(e.target.value),
+                        clearSearch: () => requestSearch(''),
+                    },
+                }}
             />
         </div>
     )

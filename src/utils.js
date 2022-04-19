@@ -3,7 +3,7 @@ export function dateFormat(inputDate) {
     console.log(inputDate);
     const arrayInputDate = inputDate.toString().split(" ");
 
-    console.log(arrayInputDate);
+    // console.log(arrayInputDate);
 
     const month = () =>{
         switch (arrayInputDate[1]) {
