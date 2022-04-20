@@ -13,14 +13,19 @@ export const addDepartment= (value)=>{
 }
 
 export const addState= (value)=>{
-    console.log("addState: ", value);
     return {
         type: "addState",
         payload: value
     }
 }
 
-//BUG problème d'import des données des boutons de séléction
+export const resetUser = (value)=>{
+    return {
+        type: "resetUser",
+        payload: value
+    }
+}
+
 export function addUser(user) {
     return (dispatch) => {
         dispatch({type : "addUser", payload: user});

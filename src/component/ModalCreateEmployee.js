@@ -1,4 +1,5 @@
-import React from 'react';
+import  React from 'react';
+import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
@@ -19,6 +20,7 @@ function ModalCreateEmployee(props) {
                             size="small"
                             onClick={() => {
                                 setOpen(false);
+                                setOpen(true);
                             }}
                         >
                             <CloseIcon fontSize="inherit" />

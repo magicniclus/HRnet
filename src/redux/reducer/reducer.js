@@ -1,35 +1,43 @@
 const initState = {
-    isLoading : false,
-    states : "Alabama",
-    department : "Sales",
-    users:[]
+    isLoading: false,
+    states: "Alabama",
+    department: "Sales",
+    users: []
 }
 
-const reducer = (state = initState, action)=>{
+const reducer = (state = initState, action) => {
     switch (action.type) {
         case "addUser":
             return {
                 ...state,
-                isLoading : true,
+                isLoading: true,
                 users: [...state.users, action.payload]
             }
-            
-        case "addDepartment":  
-        return{
-            ...state,
-            department : action.payload
-        }    
 
-        case "addState": 
-        return{
-            ...state,
-            states : action.payload
-        }    
+        case "resetUser":
+            console.log(action.payload);
+            return {
+                ...state,
+                isLoading: false,
+                users: [action.payload]
+            }
 
-        default: 
-        return{
-            ...state
-        }
+        case "addDepartment":
+            return {
+                ...state,
+                department: action.payload
+            }
+
+        case "addState":
+            return {
+                ...state,
+                states: action.payload
+            }
+
+        default:
+            return {
+                ...state
+            }
     }
 }
 

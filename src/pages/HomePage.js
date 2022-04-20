@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalCreateEmployee from '../component/ModalCreateEmployee';
-import { addUser } from '../redux/action/action';
+import { addUser, resetUser } from '../redux/action/action';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { dateFormat } from '../utils';
-import {DropDown} from "@magicniclus/components";
+import { DropDown } from "@magicniclus/components";
 import Test from '../component/test';
 
 const HomePage = () => {
@@ -85,77 +85,106 @@ const HomePage = () => {
 
     const dispatch = useDispatch()
 
-    const allState = useSelector(state=>state)
-    
-    const handleChangeFistName = (e)=>{
+    const handleChangeFistName = (e) => {
         setFirstName(e.target.value)
     }
-    
-    const handleChangeLastName = (e)=>{
+
+    const handleChangeLastName = (e) => {
         setLastName(e.target.value)
     }
-    
-    const handleChangeStreet = (e)=>{
+
+    const handleChangeStreet = (e) => {
         setStreet(e.target.value)
     }
-    
-    const handleChangeCity = (e)=>{
+
+    const handleChangeCity = (e) => {
         setCity(e.target.value)
     }
-    
-    const handleChangeCode = (e)=>{
+
+    const handleChangeCode = (e) => {
         setCode(e.target.value)
     }
+
+    const [err, setErr] = useState(false);
 
     const [selectDatePicker, setSelectDatepicker] = useState(null);
     const [selectDatePickerDeux, setSelectDatepickerDeux] = useState(null);
 
-    const handleChangeState = (e) => {   
+    const handleChangeState = (e) => {
         setStateInValue(e)
     }
 
-    const handleChangeDepartment = (e) => {   
+    const handleChangeDepartment = (e) => {
         setDepartmentInValue(e)
     }
-    
-    const addEmployee = (e)=>{
+
+    const addEmployee = (e) => {
         e.preventDefault();
 
-        if(firstName !== "" && lastName !== "" && street !== "" && city !== "" && code !== "" && stateInValue !== "" && departmentInValue !== ""){
-            
+        if (firstName !== "" && lastName !== "" && street !== "" && city !== "" && code !== "" && stateInValue !== "" && departmentInValue !== "") {
+
             const user = {
-                firstName : firstName,
-                lastName : lastName,
-                birth : dateFormat(selectDatePicker),
-                start : dateFormat(selectDatePickerDeux),
-                street : street,
-                city : city,
+                firstName: firstName,
+                lastName: lastName,
+                birth: dateFormat(selectDatePicker),
+                start: dateFormat(selectDatePickerDeux),
+                street: street,
+                city: city,
                 department: departmentInValue,
-                state : stateInValue,
-                code : code
+                state: stateInValue,
+                code: code
             }
 
             dispatch(addUser(user))
             setItsLogged('clicked')
-            
+            setErr(false)
+
+        } else {
+            setErr(true)
         }
+    }
+
+    const resetUserValue = ()=>{
+        setItsLogged(itsLogged === "clicked" ? "logged" : "clicked")
+        const resetoldUser = {
+            firstName: "",
+            lastName: "",
+            birth: "",
+            start: "",
+            street: "",
+            city: "",
+            department: "",
+            state: "",
+            code: ""
+        }
+
+        setFirstName("")
+        setLastName("")
+        setStreet("")
+        setCity("")
+        setCode("")
+        setStateInValue(stateValue[0])
+        setDepartmentInValue(department[0])
+
+        setItsLogged("logged")
+
+        dispatch(resetUser(resetoldUser))
     }
 
 
     return (
         <>
-            <div onClick={()=>setItsLogged(itsLogged === "clicked" ? "logged" : "clicked")} className={itsLogged}>
-                <ModalCreateEmployee value={itsLogged === "clicked" ? false : true }/>
+            <div onClick={resetUserValue} className={itsLogged}>
+                <ModalCreateEmployee value={itsLogged === "clicked" ? false : true} />
             </div>
             <main className="homePage">
-                <Test />
                 <h1>HRnet Exemple</h1>
                 <NavLink to="/employee-list">View Current Employees</NavLink>
                 <h2>Create Employee</h2>
-                <form onSubmit={(e)=>e.preventDefault()}>
+                <form onSubmit={(e) => e.preventDefault()}>
                     <label className="fistName" >
                         First Name
-                        <input type="text" id="firstName" value={firstName} onChange={handleChangeFistName} />
+                        <input className={err ? "input err" : "input"}  type="text" id="firstName" value={firstName} onChange={handleChangeFistName} />
                     </label>
                     <label className="lastName" >
                         Last Name
@@ -181,18 +210,21 @@ const HomePage = () => {
                         </label>
                         <div >
                             <p className="state">State</p>
-                            <DropDown title={stateValue[0]} list={stateValue} callBack={handleChangeState} />
+                            <DropDown title={stateValue[0]} list={stateValue} callBack={handleChangeState} width="160px" />
                         </div>
                     </div>
-                        <div className="department" >
-                            <p>Department</p>
-                            <DropDown title={department[0]} list={department} callBack={handleChangeDepartment} />
-                        </div>
-                        <label className="code" >
-                            Zip Code
-                            <input type="number" id="code" value={code} onChange={handleChangeCode} />
-                        </label>
-                    <button type="submit" className="button" onClick={addEmployee}>Save</button>
+                    <div className="department" >
+                        <p>Department</p>
+                        <DropDown title={department[0]} list={department} callBack={handleChangeDepartment} width="160px" />
+                    </div>
+                    <label className="code" >
+                        Zip Code
+                        <input type="number" id="code" value={code} onChange={handleChangeCode} />
+                    </label>
+                    <div className="buttonContainer">
+                        <button type="submit" className="button" onClick={addEmployee}>Save</button>
+                        {err ? <h3 className="err">Erreur de saisi</h3> : null}
+                    </div>
                 </form>
             </main>
         </>
