@@ -9,13 +9,11 @@ import SearchIcon from "@mui/icons-material/Search";
  * @typedef {("fistName"| "lastName"| "startDay"| "department"| "dateOfBirth"| "street"| "city"| "state"| "zipCode")} showKeys
  */
 
-
 /**
  * [nestedFilter description]
  *
  * @param   {Array.<Object>}  targetArray  [targetArray description]
  * @param   {String}  value        [value description]
- * @param   {showKeys}  type         [type description]
  * @param   {Function}    set
  *
  * @return  {void}               [return description]
@@ -23,16 +21,14 @@ import SearchIcon from "@mui/icons-material/Search";
 function nestedFilter(targetArray, value, set) {
     value = value.toLowerCase();
     let filterArray = [];
-    console.log(targetArray)
-    for (const type of Object.keys(targetArray[0])){
-        if (typeof targetArray[0][type] !== 'string') continue;
-        filterArray = filterArray.concat(targetArray.filter((el) => {
-            if (el[type].toLowerCase().includes(value)) return el;
-        })
-        )
-    }
+    targetArray.forEach(el=>{
+        for(const newEl of Object.values(el)){
+            if(typeof newEl !== 'string') continue
+            if(newEl.toLowerCase().includes(value)) filterArray.push(el)
+        }
+    })
 
-    set([... new Set(filterArray)]);
+    set([...new Set(filterArray)])
 }
 
 function QuickSearchToolbar(props) {
