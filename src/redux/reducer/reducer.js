@@ -2,7 +2,18 @@ const initState = {
     isLoading: false,
     states: "Alabama",
     department: "Sales",
-    users: []
+    users: [{
+        firstName: "",
+        lastName: "",
+        birth: "",
+        start: "",
+        street: "",
+        city: "",
+        department: "",
+        state: "",
+        code: ""
+    }
+    ]
 }
 
 const reducer = (state = initState, action) => {
@@ -11,7 +22,8 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoading: true,
-                users: [...state.users, action.payload]
+                // users: [...state.users, action.payload]
+                users: [action.payload]
             }
 
         case "resetUser":

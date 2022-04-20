@@ -13,6 +13,8 @@ import Test from '../component/test';
 const HomePage = () => {
     const department = ["Sales", "Marketing", "Enginnering", "Humain Resources", "Legal"]
 
+    const allState = useSelector(state => state);
+
     const stateValue = [
         'Alabama',
         'Alaska',
@@ -121,7 +123,7 @@ const HomePage = () => {
     const addEmployee = (e) => {
         e.preventDefault();
 
-        if (firstName !== "" && lastName !== "" && street !== "" && city !== "" && code !== "" && stateInValue !== "" && departmentInValue !== "") {
+        if (firstName !== "" && lastName !== "" && street !== "" && city !== "" && code !== "" && stateInValue !== "" && departmentInValue !== "" && selectDatePicker !== null && selectDatePickerDeux !== null) {
 
             const user = {
                 firstName: firstName,
@@ -195,7 +197,7 @@ const HomePage = () => {
                         <DatePicker selected={selectDatePicker} onChange={date => setSelectDatepicker(date)} maxDate={new Date()} placeholderText="dd/mm/yyyy" />
                     </label>
                     <label className="start" >
-                        Last Name
+                        Start Date
                         <DatePicker selected={selectDatePickerDeux} onChange={date => setSelectDatepickerDeux(date)} maxDate={new Date()} placeholderText="dd/mm/yyyy" />
                     </label>
                     <div className="adress">
