@@ -1,3 +1,4 @@
+/* Setting the initial state of the application. */
 const initState = {
     isLoading: false,
     states: "Alabama",
@@ -16,6 +17,12 @@ const initState = {
     ]
 }
 
+/**
+ * The reducer function takes in the current state and an action, and returns a new state
+ * @param [state] - This is the current state of the store.
+ * @param action - This is the action object that was returned from the action creator.
+ * @returns The state is being returned.
+ */
 const reducer = (state = initState, action) => {
     switch (action.type) {
         case "addUser":

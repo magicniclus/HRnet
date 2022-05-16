@@ -8,10 +8,18 @@ import NotFound from "./pages/NotFound";
 
 //Materiel Ui
 
+/**
+ * It returns a wrapper for the whole app. It is a component that provides a theme to all of its
+ * children
+ * @returns A function that returns a wrapper for the whole app. It is a component that provides a
+ * theme to all of its children.
+ */
 function App() {
 
+  /* A function that returns the following: */
   return (
 
+    /* A wrapper for the whole app. It is a component that provides a theme to all of its children. */
     <ThemeProvider theme={themeColor}>
       <div className="App">
       <BrowserRouter >

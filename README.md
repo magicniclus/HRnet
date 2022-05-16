@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# OpenClassRooms Project 14
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Creation of a web application for a banking service allowing the user to connect and have access to different data
 
-## Available Scripts
+## Dependencies
 
-In the project directory, you can run:
+"@emotion/react": "^11.9.0",
 
-### `npm start`
+"@emotion/serialize": "^1.0.3",
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+"@emotion/styled": "^11.8.1",
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+"@magicniclus/components": "^1.0.12",
 
-### `npm test`
+"@mui/icons-material": "^5.5.1",
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+"@mui/lab": "^5.0.0-alpha.76",
 
-### `npm run build`
+"@mui/material": "^5.6.0",
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+"@mui/styles": "^5.6.0",
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+"@mui/x-data-grid": "^5.8.0",
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+"@testing-library/jest-dom": "^5.16.3",
 
-### `npm run eject`
+"@testing-library/react": "^12.1.4",
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+"@testing-library/user-event": "^13.5.0",
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+"react": "^18.0.0",
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+"react-datepicker": "^4.7.0",
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+"react-dom": "^18.0.0",
 
-## Learn More
+"react-modal": "^3.14.4",
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+"react-redux": "^7.2.8",
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+"react-router-dom": "^6.3.0",
 
-### Code Splitting
+"react-scripts": "5.0.1",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+"react-thunk": "^1.0.0",
 
-### Analyzing the Bundle Size
+"redux": "^4.1.2",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+"redux-devtools-extension": "^2.13.9",
 
-### Making a Progressive Web App
+"redux-thunk": "^2.4.1",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+"sass": "^1.50.0",
 
-### Advanced Configuration
+"web-vitals": "^2.1.4"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Recommended text editor
 
-### Deployment
+Visual Studio Code
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Installation Dependencies
+You need Node to run the npm commands
 
-### `npm run build` fails to minify
+Install and run the project
+Clone the project to your computer
+https://github.com/magicniclus/hrnet.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Go to the project folder
+cd hrnet
+
+Install the packages
+npm install
+
+Run the project (port 3000 by default)
+npm start
+

@@ -7,11 +7,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import { createTheme } from "@mui/material/styles";
 import { createStyles, makeStyles } from "@mui/styles";
 
+/**
+ * Escape all special characters in a string so that it can be used in a regular expression.
+ * @param value - The string to be escaped
+ * @returns the value of the string with the special characters escaped.
+ */
 function escapeRegExp(value) {
     return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
+/* Creating a default theme for the material-ui components. */
 const defaultTheme = createTheme();
+
+/* Creating a default theme for the material-ui components. */
 const useStyles = makeStyles(
     (theme) =>
         createStyles({
@@ -38,6 +46,11 @@ const useStyles = makeStyles(
     { defaultTheme },
 );
 
+/**
+ * It's a text field with a search icon and a clear icon
+ * @param props - {
+ * @returns A div with a text field.
+ */
 function QuickSearchToolbar(props) {
     const classes = useStyles();
 
@@ -68,12 +81,16 @@ function QuickSearchToolbar(props) {
     );
 }
 
+/* Getting the data from local storage and parsing it. */
 function ShowMeEmployee() {
     let addOneUser = localStorage.getItem("employees")
 let users = JSON.parse(addOneUser);
 
+/* Parsing the string from local storage into a JSON object. */
 const roows = [];
+/* Creating an empty array. */
 let element;
+/* Looping through the array of objects and pushing the values into the roows array. */
 for (let i = 0, end=users.length; i < end; i++) {
     element = users[i];
     roows.push( {
@@ -89,7 +106,10 @@ for (let i = 0, end=users.length; i < end; i++) {
         zipCode: element.code
     })
 }
+    
+    /* Creating a variable called employeeList and setting it equal to the roows array. */
     const employeeList = roows;
+    /* Creating an array of objects. */
     const columns = [
         { field: 'firstName', headerName: 'firstName', width: 150 },
         { field: 'lastName', headerName: 'lastName', width: 150 },
@@ -101,10 +121,19 @@ for (let i = 0, end=users.length; i < end; i++) {
         { field: 'state', headerName: 'state', width: 150 },
         { field: 'zipCode', headerName: 'zipCode', width: 150 },
     ];
+    /* Creating a state variable called searchText and setting it equal to an empty string. */
     const [searchText, setSearchText] = React.useState('');
+    /* Setting the rows to the employeeList. */
     const [rows, setRows] = React.useState(employeeList);
+    /* Setting the page size to 5. */
     const [pageSize, setPageSize] = React.useState(5);
 
+    /**
+     * The function takes in a search value, sets the search text to the search value, creates a
+     * regular expression that is case insensitive, and then filters the employee list based on the
+     * search value
+     * @param searchValue - The value of the search input.
+     */
     const requestSearch = (searchValue) => {
         setSearchText(searchValue);
         const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
@@ -114,10 +143,13 @@ for (let i = 0, end=users.length; i < end; i++) {
         setRows(filteredRows);
     };
 
+    /* Setting the rows to the employeeList. */
     React.useEffect(() => {
         // setRows(employeeList);
     }, [employeeList]);
 
+    /* Returning the data grid with the rows per page options, pagination, auto height, components,
+    rows, columns, and components props. */
     return (
         <DataGrid
             rowsPerPageOptions={[5, 10, 15]}

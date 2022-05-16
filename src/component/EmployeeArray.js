@@ -10,13 +10,11 @@ import SearchIcon from "@mui/icons-material/Search";
  */
 
 /**
- * [nestedFilter description]
- *
- * @param   {Array.<Object>}  targetArray  [targetArray description]
- * @param   {String}  value        [value description]
- * @param   {Function}    set
- *
- * @return  {void}               [return description]
+ * It takes an array of objects, a value to search for, and a setter function to update the state of
+ * the filtered array
+ * @param targetArray - the array you want to filter
+ * @param value - the value of the input field
+ * @param set - the setter function for the state variable you want to update
  */
 function nestedFilter(targetArray, value, set) {
     value = value.toLowerCase();
@@ -31,6 +29,7 @@ function nestedFilter(targetArray, value, set) {
     set([...new Set(filterArray)])
 }
 
+/* A function that returns a text field with a search icon and a clear icon. */
 function QuickSearchToolbar(props) {
     return (
         <div className="value">
@@ -60,6 +59,9 @@ function QuickSearchToolbar(props) {
 
 
 
+/**
+ * This function is used to create an array of objects that will be used to populate the table
+ */
 const EmployeeArray = () => {
     let addOneUser = localStorage.getItem("employees")
     let users = JSON.parse(addOneUser);
@@ -85,6 +87,7 @@ const EmployeeArray = () => {
     }
 
 
+    /* Creating an array of objects that will be used to populate the table. */
     const columns = [
         { field: 'firstName', headerName: 'firstName', width: 150 },
         { field: 'lastName', headerName: 'lastName', width: 150 },
@@ -97,13 +100,21 @@ const EmployeeArray = () => {
         { field: 'zipCode', headerName: 'zipCode', width: 150 },
     ];
 
+    /* Creating a hook that is used to update the state of the table. */
     const [getRows, setGetRows] = useState(rows);
+    /* Creating a hook that is used to update the state of the table. */
     const [searched, setSearched] = useState("");
+    /**
+     * It takes a value, sets it to the state, and then filters the rows based on that value
+     * @param searchedVal - The value that the user is searching for.
+     */
     const requestSearch = (searchedVal) => {
         setSearched(searchedVal)
         nestedFilter(rows, searchedVal, setGetRows);
     };
 
+    /* Returning a div with a height of 700, a width of 90%, and a margin top of 5rem. It is also
+    returning a DataGrid with rows, columns, components, and componentsProps. */
     return (
         <div style={{ height: 700, width: '90%', marginTop: "5rem" }}>
             <DataGrid
