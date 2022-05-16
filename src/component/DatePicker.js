@@ -13,7 +13,6 @@ const DatePickerComponent = () => {
     return (
         <div>
             <DatePicker selected={selectDatePicker} onChange={date => setSelectDatepicker(date)}/>
-            
         </div>
     );
 };
