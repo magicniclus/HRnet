@@ -8,7 +8,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { dateFormat } from '../utils';
 import { DropDown } from "@magicniclus/components";
-import Test from '../component/test';
 
 /**
  * It's a React component that is used to create a new employee
